@@ -164,9 +164,10 @@ export default function App() {
     return () => observer.disconnect()
   }, [])
 
-  const dock = smoothstep(heroProgress, 0.02, 0.74)
-  const logoScale = 1 - dock * 0.56
-  const logoY = -dock * 35
+  // Dock jaldi complete karo aur uske baad same pose hold rakho.
+  const dock = smoothstep(heroProgress, 0.02, 0.45)
+  const logoScale = 1 - dock * 0.34
+  const logoY = -dock * 14
   const logoOpacity = 1
 
   return (
