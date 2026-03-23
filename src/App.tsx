@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useLayoutEffect, useRef, type WheelEvent } from 'react'
+import { Suspense, useCallback, useEffect, useLayoutEffect, useRef, type WheelEvent } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import {
   Bloom,
@@ -129,10 +129,9 @@ function NarrativeStage() {
               visibility: text1.opacity < 0.02 ? 'hidden' : 'visible',
             }}
           >
-            <p className="narrative-mark">Motion Byte</p>
+            <p className="narrative-mark">About Motion Byte</p>
             <p className="narrative-line">
-              Wahi naam jo particles mein tha — ab type mein. Neeche scroll, ye bhi zoom out hoke screen se
-              nikal jayega.
+              Every story begins as a spark... We turn that spark into <strong>cinema</strong>.
             </p>
           </div>
         </div>
@@ -146,9 +145,9 @@ function NarrativeStage() {
             }}
           >
             <p className="narrative-line narrative-line--accent">
-              Motion · glow · depth — jo logo mein dikha, wahi energy yahan
+              We don&apos;t just create videos - we build <strong>entire worlds</strong>.
             </p>
-            <p className="narrative-hint">Motion Byte — agla section neeche</p>
+            <p className="narrative-hint">Scroll for full About section</p>
           </div>
         </div>
       </div>
@@ -182,6 +181,32 @@ export default function App() {
     window.addEventListener('resize', syncHeroProgress)
     return () => window.removeEventListener('resize', syncHeroProgress)
   }, [syncHeroProgress])
+
+  useEffect(() => {
+    const root = scrollRef.current
+    if (!root) return
+    const nodes = Array.from(root.querySelectorAll<HTMLElement>('.about-reveal'))
+    if (nodes.length === 0) return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue
+          entry.target.classList.add('is-visible')
+          observer.unobserve(entry.target)
+        }
+      },
+      {
+        root,
+        threshold: 0.2,
+        rootMargin: '0px 0px -8% 0px',
+      },
+    )
+    for (let i = 0; i < nodes.length; i++) {
+      nodes[i].style.transitionDelay = `${Math.min(i * 75, 525)}ms`
+      observer.observe(nodes[i])
+    }
+    return () => observer.disconnect()
+  }, [])
 
   return (
     <div className="app-page">
@@ -217,13 +242,55 @@ export default function App() {
           </div>
         </div>
 
-        <section className="scroll-next-section" aria-label="Next">
-          <p className="next-sec-kicker">02</p>
-          <h2 className="next-sec-title">Agla section</h2>
-          <p className="next-sec-body">
-            Ye asli page scroll hai — hero scroll khatam hone ke baad yahan aa jate ho. Upar scroll se
-            wapas logo + story.
-          </p>
+        <section className="scroll-next-section" aria-label="About Motion Byte">
+          <article className="about-content">
+            <p className="next-sec-kicker about-reveal">02</p>
+            <h2 className="next-sec-title about-reveal">About Motion Byte</h2>
+
+            <p className="next-sec-body about-reveal">
+              Every story begins as a spark... We turn that spark into <strong>cinema</strong>.
+            </p>
+
+            <p className="next-sec-body about-reveal">
+              <strong>Motion Byte</strong> is an AI-powered creative studio where imagination meets technology to
+              shape the future of storytelling. We don&apos;t just create videos - we build <strong>entire worlds</strong>.
+            </p>
+
+            <p className="next-sec-body about-reveal">
+              From high-impact <strong>music videos</strong>, to immersive <strong>series</strong>, to visually
+              striking <strong>films</strong> - we use the power of AI to bring the impossible to life. What once
+              required massive budgets and resources... we recreate with intelligence, precision, and vision.
+            </p>
+
+            <p className="next-sec-body about-reveal">
+              Our focus is simple: <strong>Control the story. Dominate the visuals. Deliver the emotion.</strong>
+            </p>
+
+            <p className="next-sec-body about-reveal">
+              Everything else - websites, apps, design - is secondary. Our true craft lies in <strong>making
+              stories feel alive</strong>.
+            </p>
+
+            <p className="next-sec-body about-reveal">
+              We create space for artists to express without limits. We give brands a cinematic identity. And we
+              transform raw ideas into experiences that stay with the audience.
+            </p>
+
+            <p className="next-sec-body about-reveal">
+              This is not just a studio. This is a <strong>new era of storytelling</strong>.
+            </p>
+
+            <p className="next-sec-body about-reveal">
+              <strong>
+                If you have a vision - we&apos;ll turn it into cinema. If you don&apos;t - we&apos;ll show you what&apos;s
+                possible.
+              </strong>
+            </p>
+
+            <p className="next-sec-body next-sec-body--closing about-reveal">
+              <strong>Welcome to Motion Byte.</strong>
+            </p>
+          </article>
         </section>
       </div>
     </div>
