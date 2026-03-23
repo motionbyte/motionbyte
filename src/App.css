@@ -3,7 +3,7 @@
   flex: 1;
   min-height: 0;
   width: 100%;
-  background: #06040c;
+  background: linear-gradient(180deg, #06040c 0%, #0a0718 35%, #080616 100%);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -20,17 +20,18 @@
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
-  scroll-behavior: smooth;
+  scroll-behavior: auto;
 }
 
-/* Lamba scroll = logo out → 2 text beats → exit */
+/* Lamba scroll: fullscreen logo se top-dock transition */
 .scroll-hero-block {
-  min-height: 320vh;
+  position: relative;
 }
 
 .scroll-sticky-view {
   position: sticky;
   top: 0;
+  z-index: 5;
   width: 100%;
   min-height: 0;
   height: 100vh;
@@ -38,7 +39,8 @@
   max-height: 100dvh;
   display: flex;
   flex-direction: column;
-  background: #06040c;
+  background: transparent;
+  pointer-events: none;
 }
 
 /* Poora viewport logo — text alag layer, logo ke upar nahi */
@@ -47,6 +49,13 @@
   min-height: 0;
   position: relative;
   width: 100%;
+  transform-origin: top center;
+  will-change: transform, opacity;
+  background: transparent;
+}
+
+.logo-dock-spacer {
+  height: 48vh;
 }
 
 .app-canvas {
@@ -60,90 +69,19 @@
   height: 100% !important;
 }
 
-/* Logo ke baad: beech screen — koi cheez logo phase mein dikhti nahi */
-.narrative-stage {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1.5rem;
-  pointer-events: none;
-}
-
-.narrative-stack {
-  position: relative;
-  width: 100%;
-  max-width: 28rem;
-  min-height: 8rem;
-}
-
-.narrative-panel {
-  position: absolute;
-  inset: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.narrative-panel-mid {
-  max-width: 28rem;
-  transform-origin: center center;
-  will-change: transform, opacity;
-}
-
-.narrative-kicker {
-  margin: 0 0 0.4rem;
-  font-size: clamp(0.95rem, 2.4vw, 1.2rem);
-  font-weight: 600;
-  letter-spacing: 0.06em;
-  color: rgba(235, 230, 255, 0.92);
-}
-
-/* Logo wordmark jaisa feel — bold, thoda spread */
-.narrative-mark {
-  margin: 0 0 0.55rem;
-  font-size: clamp(1.35rem, 4.5vw, 2.15rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(248, 242, 255, 0.96);
-  text-shadow: 0 0 40px rgba(160, 140, 255, 0.25);
-}
-
-.narrative-line {
-  margin: 0;
-  font-size: clamp(0.74rem, 1.9vw, 0.88rem);
-  line-height: 1.45;
-  color: rgba(195, 185, 245, 0.78);
-}
-
-.narrative-line--accent {
-  color: rgba(210, 200, 255, 0.88);
-  font-size: clamp(0.78rem, 2vw, 0.92rem);
-}
-
-.narrative-hint {
-  margin: 0.5rem 0 0;
-  font-size: 0.62rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(150, 140, 210, 0.42);
-}
-
 /* Natural next “page” — logo ke baad long-form About copy */
 .scroll-next-section {
   min-height: 100dvh;
   min-height: 100vh;
   box-sizing: border-box;
-  padding: clamp(2.25rem, 8vh, 5rem) clamp(1.1rem, 4vw, 3rem) clamp(3rem, 9vh, 5rem);
+  padding: clamp(18rem, 48vh, 30rem) clamp(1.1rem, 4vw, 3rem) clamp(3rem, 9vh, 5rem);
   display: flex;
   justify-content: center;
   text-align: left;
-  background: linear-gradient(180deg, #06040c 0%, #0a0718 35%, #080616 100%);
-  border-top: 1px solid rgba(120, 100, 200, 0.12);
+  background: transparent;
+  border-top: 0;
+  position: relative;
+  z-index: 2;
 }
 
 .about-content {

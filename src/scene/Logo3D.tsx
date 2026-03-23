@@ -2,14 +2,13 @@ import { useTexture } from '@react-three/drei'
 import { useFrame, useThree } from '@react-three/fiber'
 import { useEffect, useMemo, useRef } from 'react'
 import * as THREE from 'three'
-import { useScrollJourney } from '../ScrollJourneyContext'
 
 const BASE_WIDTH = 2.8
 const MAX_PARTICLES = 22_000
 const SAMPLE_STEP = 2
 
 /** Core sprite se glow kitna bada (pehle ~2.35; ab ~2×) */
-const GLOW_SIZE_MULT = 4.7
+const GLOW_SIZE_MULT = 5.35
 /** Canvas glow texture — linear soft falloff + halka gaussian blur (~0.5 feel = 8px @128) */
 const GLOW_TEXTURE_BLUR_PX = 8
 const GLOW_TEX_INTERNAL = 176
@@ -175,7 +174,6 @@ type ParticleData = {
 export function Logo3D() {
   const texture = useTexture('/logo.png')
   const { gl } = useThree()
-  const { logoScroll } = useScrollJourney()
   const groupRef = useRef<THREE.Group>(null)
   const materialRef = useRef<THREE.PointsMaterial>(null)
   const glowMaterialRef = useRef<THREE.PointsMaterial>(null)
@@ -264,26 +262,23 @@ export function Logo3D() {
     }
     geometry.attributes.position.needsUpdate = true
 
-    const { scale: scrollScale, y: scrollY, opacityMul } = logoScroll
-
     if (g) {
       const tx = px * 0.48
-      const ty = py * 0.32 + scrollY
+      const ty = py * 0.32
       g.position.x = THREE.MathUtils.lerp(g.position.x, tx, 0.12)
       g.position.y = THREE.MathUtils.lerp(g.position.y, ty, 0.12)
       const aimRy = px * 0.16
       const aimRx = -py * 0.11
       g.rotation.y = THREE.MathUtils.lerp(g.rotation.y, aimRy, 0.1)
       g.rotation.x = THREE.MathUtils.lerp(g.rotation.x, aimRx, 0.1)
-      g.scale.setScalar(scrollScale)
+      g.scale.setScalar(1)
     }
 
     if (mat) {
       const breathe = Math.sin(t * 0.9) * 0.0032
       const hoverSize = hover * 0.014
       mat.size = 0.026 + breathe + hoverSize
-      const targetOp =
-        THREE.MathUtils.clamp(0.88 + hover * 0.2, 0.84, 1) * opacityMul
+      const targetOp = THREE.MathUtils.clamp(0.96 + hover * 0.22, 0.92, 1)
       mat.opacity = THREE.MathUtils.lerp(mat.opacity, targetOp, 0.12)
     }
 
@@ -291,8 +286,7 @@ export function Logo3D() {
       const breathe = Math.sin(t * 0.9 + 0.4) * 0.006
       const hoverSize = hover * 0.044
       glowMat.size = mat.size * GLOW_SIZE_MULT + breathe + hoverSize
-      const gOp =
-        THREE.MathUtils.clamp(0.72 + hover * 0.32, 0.58, 0.95) * opacityMul
+      const gOp = THREE.MathUtils.clamp(0.9 + hover * 0.28, 0.82, 1)
       glowMat.opacity = THREE.MathUtils.lerp(glowMat.opacity, gOp, 0.1)
     }
   })
@@ -311,7 +305,7 @@ export function Logo3D() {
           size={0.128}
           sizeAttenuation
           toneMapped={false}
-          opacity={0.82}
+          opacity={0.96}
           color="#ebe4ff"
         />
       </points>
@@ -327,7 +321,7 @@ export function Logo3D() {
           size={0.028}
           sizeAttenuation
           toneMapped={false}
-          opacity={0.92}
+          opacity={1}
         />
       </points>
     </group>
