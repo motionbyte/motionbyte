@@ -18,12 +18,14 @@ import {
   VignetteTechnique,
 } from 'postprocessing'
 import * as THREE from 'three'
+import { CINEMATIC_CA_OFFSET } from './scene/cinematicPostFxConstants'
 import { Logo3D } from './scene/Logo3D'
 import { MagnifyCursor } from './scene/MagnifyCursor'
+import { AboutSection } from './sections/AboutSection'
+import { ServicesSection } from './sections/ServicesSection'
+import { PortfolioSection } from './sections/PortfolioSection'
 import { useScrollJourney } from './ScrollJourneyContext'
 import './App.css'
-
-const CA_OFFSET = new THREE.Vector2(0.001, 0.00065)
 
 function smoothstep(t: number, a: number, b: number) {
   if (b <= a) return t >= b ? 1 : 0
@@ -86,7 +88,7 @@ function Scene() {
           mipmapBlur
         />
         <ChromaticAberration
-          offset={CA_OFFSET}
+          offset={CINEMATIC_CA_OFFSET}
           radialModulation
           modulationOffset={0.22}
         />
@@ -141,27 +143,30 @@ export default function App() {
   useEffect(() => {
     const root = scrollRef.current
     if (!root) return
-    const nodes = Array.from(root.querySelectorAll<HTMLElement>('.about-reveal'))
-    if (nodes.length === 0) return
-    const observer = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue
-          entry.target.classList.add('is-visible')
-          observer.unobserve(entry.target)
-        }
-      },
-      {
-        root,
-        threshold: 0.2,
-        rootMargin: '0px 0px -8% 0px',
-      },
+    const nodes = Array.from(
+      root.querySelectorAll<HTMLElement>('.about-reveal, .services-reveal, .portfolio-reveal'),
     )
-    for (let i = 0; i < nodes.length; i++) {
-      nodes[i].style.transitionDelay = `${Math.min(i * 75, 525)}ms`
-      observer.observe(nodes[i])
+    if (nodes.length === 0) return
+
+    const updateReveal = () => {
+      const vh = root.clientHeight
+      const enterLine = vh * 0.82
+      const leaveLine = -vh * 0.2
+
+      for (const node of nodes) {
+        const r = node.getBoundingClientRect()
+        const isVisible = r.top <= enterLine && r.bottom >= leaveLine
+        node.classList.toggle('is-visible', isVisible)
+      }
     }
-    return () => observer.disconnect()
+
+    updateReveal()
+    root.addEventListener('scroll', updateReveal, { passive: true })
+    window.addEventListener('resize', updateReveal)
+    return () => {
+      root.removeEventListener('scroll', updateReveal)
+      window.removeEventListener('resize', updateReveal)
+    }
   }, [])
 
   // Dock jaldi complete karo aur uske baad same pose hold rakho.
@@ -207,58 +212,11 @@ export default function App() {
             </div>
           </div>
           <div className="logo-dock-spacer" />
-
-          <section className="scroll-next-section" aria-label="About Motion Byte">
-            <article className="about-content">
-              <p className="next-sec-kicker about-reveal">02</p>
-              <h2 className="next-sec-title about-reveal">About Motion Byte</h2>
-
-              <p className="next-sec-body about-reveal">
-                Every story begins as a spark... We turn that spark into <strong>cinema</strong>.
-              </p>
-
-              <p className="next-sec-body about-reveal">
-                <strong>Motion Byte</strong> is an AI-powered creative studio where imagination meets technology to
-                shape the future of storytelling. We don&apos;t just create videos - we build <strong>entire worlds</strong>.
-              </p>
-
-              <p className="next-sec-body about-reveal">
-                From high-impact <strong>music videos</strong>, to immersive <strong>series</strong>, to visually
-                striking <strong>films</strong> - we use the power of AI to bring the impossible to life. What once
-                required massive budgets and resources... we recreate with intelligence, precision, and vision.
-              </p>
-
-              <p className="next-sec-body about-reveal">
-                Our focus is simple: <strong>Control the story. Dominate the visuals. Deliver the emotion.</strong>
-              </p>
-
-              <p className="next-sec-body about-reveal">
-                Everything else - websites, apps, design - is secondary. Our true craft lies in <strong>making
-                stories feel alive</strong>.
-              </p>
-
-              <p className="next-sec-body about-reveal">
-                We create space for artists to express without limits. We give brands a cinematic identity. And we
-                transform raw ideas into experiences that stay with the audience.
-              </p>
-
-              <p className="next-sec-body about-reveal">
-                This is not just a studio. This is a <strong>new era of storytelling</strong>.
-              </p>
-
-              <p className="next-sec-body about-reveal">
-                <strong>
-                  If you have a vision - we&apos;ll turn it into cinema. If you don&apos;t - we&apos;ll show you what&apos;s
-                  possible.
-                </strong>
-              </p>
-
-              <p className="next-sec-body next-sec-body--closing about-reveal">
-                <strong>Welcome to Motion Byte.</strong>
-              </p>
-            </article>
-          </section>
         </div>
+
+        <AboutSection />
+        <ServicesSection />
+        <PortfolioSection />
       </div>
     </div>
   )
