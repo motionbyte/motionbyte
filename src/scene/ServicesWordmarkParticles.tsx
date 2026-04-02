@@ -2,6 +2,8 @@ import { useTexture } from '@react-three/drei'
 import { Canvas } from '@react-three/fiber'
 import { Suspense, useMemo, useRef } from 'react'
 import * as THREE from 'three'
+import { useDocumentVisible } from '../hooks/useDocumentVisible'
+import { useIntersectionVisible } from '../hooks/useIntersectionVisible'
 import { createParticleDataFromImageSource, DEFAULT_LOGO_BASE_WIDTH } from './particleLogoCore'
 import { ParticlePointsGroup } from './ParticlePointsGroup'
 import { SERVICES_WORDMARK_PNG } from './servicesWordmarkAssets'
@@ -68,22 +70,28 @@ function ServicesParticlesLayer({ assetUrl }: { assetUrl: string }) {
 }
 
 export function ServicesWordmarkParticles() {
+  const rootRef = useRef<HTMLDivElement>(null)
+  const docVisible = useDocumentVisible()
+  const inView = useIntersectionVisible(rootRef, '100px')
+  const runWebGl = docVisible && inView
   const devBust = useRef(import.meta.env.DEV ? `?v=${Date.now()}` : '').current
   const assetUrl = SERVICES_WORDMARK_PNG.url + devBust
 
   return (
-    <div className="services-wordmark-stack">
+    <div ref={rootRef} className="services-wordmark-stack">
       <Canvas
         className="services-wordmark-canvas"
         camera={{ position: [0, 0, 3.05], fov: 32, near: 0.1, far: 24 }}
         style={{ width: '100%', height: '100%', display: 'block' }}
         dpr={[1, 2]}
+        frameloop={runWebGl ? 'always' : 'never'}
         gl={{
           antialias: true,
           alpha: true,
           premultipliedAlpha: false,
           powerPreference: 'high-performance',
           failIfMajorPerformanceCaveat: false,
+          stencil: false,
         }}
         onCreated={({ gl }) => {
           gl.setClearColor(0x000000, 0)

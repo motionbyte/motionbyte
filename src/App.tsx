@@ -21,6 +21,8 @@ import * as THREE from 'three'
 import { CINEMATIC_CA_OFFSET } from './scene/cinematicPostFxConstants'
 import { Logo3D } from './scene/Logo3D'
 import { MagnifyCursor } from './scene/MagnifyCursor'
+import { useDocumentVisible } from './hooks/useDocumentVisible'
+import { useIntersectionVisible } from './hooks/useIntersectionVisible'
 import { AboutSection } from './sections/AboutSection'
 import { ServicesSection } from './sections/ServicesSection'
 import { PortfolioSection } from './sections/PortfolioSection'
@@ -123,6 +125,10 @@ function Scene() {
 export default function App() {
   const scrollRef = useRef<HTMLDivElement>(null)
   const heroRef = useRef<HTMLDivElement>(null)
+  const heroCanvasSlotRef = useRef<HTMLDivElement>(null)
+  const docVisible = useDocumentVisible()
+  const heroCanvasInView = useIntersectionVisible(heroCanvasSlotRef, '120px')
+  const runHeroWebGl = docVisible && heroCanvasInView
   const { heroProgress, setHeroProgress } = useScrollJourney()
 
   const syncHeroProgress = useCallback(() => {
@@ -185,6 +191,7 @@ export default function App() {
         <div ref={heroRef} className="scroll-hero-block">
           <div className="scroll-sticky-view">
             <div
+              ref={heroCanvasSlotRef}
               className="scroll-canvas-slot"
               style={{
                 opacity: logoOpacity,
@@ -196,11 +203,13 @@ export default function App() {
                 style={{ width: '100%', height: '100%' }}
                 camera={{ position: [0, 0, 2.9], fov: 32 }}
                 dpr={[1, 2]}
+                frameloop={runHeroWebGl ? 'always' : 'never'}
                 gl={{
                   antialias: true,
                   alpha: true,
                   premultipliedAlpha: false,
                   powerPreference: 'high-performance',
+                  stencil: false,
                 }}
                 onCreated={({ gl, scene }) => {
                   scene.background = null
