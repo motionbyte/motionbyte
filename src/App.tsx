@@ -3,7 +3,6 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import {
   Bloom,
   BrightnessContrast,
-  ChromaticAberration,
   EffectComposer,
   HueSaturation,
   Noise,
@@ -18,7 +17,6 @@ import {
   VignetteTechnique,
 } from 'postprocessing'
 import * as THREE from 'three'
-import { CINEMATIC_CA_OFFSET } from './scene/cinematicPostFxConstants'
 import { Logo3D } from './scene/Logo3D'
 import { MagnifyCursor } from './scene/MagnifyCursor'
 import { useDocumentVisible } from './hooks/useDocumentVisible'
@@ -88,11 +86,6 @@ function Scene() {
           luminanceSmoothing={0.5}
           intensity={1.48}
           mipmapBlur
-        />
-        <ChromaticAberration
-          offset={CINEMATIC_CA_OFFSET}
-          radialModulation
-          modulationOffset={0.22}
         />
         <HueSaturation hue={0.062} saturation={0.18} />
         <BrightnessContrast brightness={0.012} contrast={0.24} />
