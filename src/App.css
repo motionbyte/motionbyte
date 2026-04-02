@@ -110,8 +110,7 @@
 .about-reveal,
 .services-reveal,
 .team-reveal,
-.contact-reveal,
-.footer-reveal {
+.contact-reveal {
   opacity: 0;
   transform: translate3d(0, 34px, 0) scale(0.985);
   /* No filter: blur() — keeps WebGL wordmarks + text sharp during scroll reveal */
@@ -124,8 +123,7 @@
 .about-reveal.is-visible,
 .services-reveal.is-visible,
 .team-reveal.is-visible,
-.contact-reveal.is-visible,
-.footer-reveal.is-visible {
+.contact-reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
 }
@@ -216,9 +214,7 @@
   .team-reveal,
   .team-reveal.is-visible,
   .contact-reveal,
-  .contact-reveal.is-visible,
-  .footer-reveal,
-  .footer-reveal.is-visible {
+  .contact-reveal.is-visible {
     opacity: 1;
     transform: none;
     filter: none;

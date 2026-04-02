@@ -173,7 +173,7 @@ export default function App() {
     if (!root) return
     const nodes = Array.from(
       root.querySelectorAll<HTMLElement>(
-        '.about-reveal, .services-reveal, .portfolio-reveal, .team-reveal, .contact-reveal, .footer-reveal',
+        '.about-reveal, .services-reveal, .portfolio-reveal, .team-reveal, .contact-reveal',
       ),
     )
     if (nodes.length === 0) return

@@ -11,7 +11,7 @@ const NAV = [
 export function Footer() {
   return (
     <footer className="site-footer">
-      <div className="site-footer-glass footer-reveal">
+      <div className="site-footer-glass">
         <div className="site-footer-inner">
           <div className="site-footer-brand">
             <span className="site-footer-logo">Motion Byte</span>
