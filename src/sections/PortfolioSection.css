@@ -284,18 +284,15 @@
 .portfolio-reveal {
   opacity: 0;
   transform: translate3d(0, 34px, 0) scale(0.985);
-  filter: blur(12px);
   transition:
     opacity 620ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    transform 760ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    filter 760ms cubic-bezier(0.2, 0.7, 0.2, 1);
-  will-change: opacity, transform, filter;
+    transform 760ms cubic-bezier(0.2, 0.7, 0.2, 1);
+  will-change: opacity, transform;
 }
 
 .portfolio-reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
-  filter: blur(0);
 }
 
 @media (prefers-reduced-motion: reduce) {

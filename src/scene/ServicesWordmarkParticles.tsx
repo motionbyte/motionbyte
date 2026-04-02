@@ -83,7 +83,7 @@ export function ServicesWordmarkParticles() {
         className="services-wordmark-canvas"
         camera={{ position: [0, 0, 3.05], fov: 32, near: 0.1, far: 24 }}
         style={{ width: '100%', height: '100%', display: 'block' }}
-        dpr={[1, 2]}
+        dpr={[1, 2.5]}
         frameloop={runWebGl ? 'always' : 'never'}
         gl={{
           antialias: true,
@@ -95,6 +95,7 @@ export function ServicesWordmarkParticles() {
         }}
         onCreated={({ gl }) => {
           gl.setClearColor(0x000000, 0)
+          gl.outputColorSpace = THREE.SRGBColorSpace
         }}
       >
         <ServicesLights />

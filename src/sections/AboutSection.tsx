@@ -3,7 +3,7 @@ import './AboutSection.css'
 
 export function AboutSection() {
   return (
-    <section className="about-section scroll-next-section" aria-label="About Motion Byte">
+    <section id="section-about" className="about-section scroll-next-section" aria-label="About Motion Byte">
       <article className="about-content">
         <p className="next-sec-kicker about-reveal">02</p>
         <div className="about-heading-wrap about-reveal">

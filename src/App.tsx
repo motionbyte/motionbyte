@@ -1,4 +1,4 @@
-import { Suspense, useCallback, useEffect, useLayoutEffect, useRef } from 'react'
+import { Suspense, useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { Canvas, useFrame, useThree } from '@react-three/fiber'
 import {
   Bloom,
@@ -123,6 +123,7 @@ export default function App() {
   const heroCanvasInView = useIntersectionVisible(heroCanvasSlotRef, '120px')
   const runHeroWebGl = docVisible && heroCanvasInView
   const { heroProgress, setHeroProgress } = useScrollJourney()
+  const [showMobileAboutCue, setShowMobileAboutCue] = useState(true)
 
   const syncHeroProgress = useCallback(() => {
     const root = scrollRef.current
@@ -138,6 +139,31 @@ export default function App() {
     window.addEventListener('resize', syncHeroProgress)
     return () => window.removeEventListener('resize', syncHeroProgress)
   }, [syncHeroProgress])
+
+  const updateMobileAboutCue = useCallback(() => {
+    const root = scrollRef.current
+    const hero = heroRef.current
+    if (!root || !hero) return
+    setShowMobileAboutCue(root.scrollTop < hero.offsetHeight * 0.72)
+  }, [])
+
+  const onScrollRoot = useCallback(() => {
+    syncHeroProgress()
+    updateMobileAboutCue()
+  }, [syncHeroProgress, updateMobileAboutCue])
+
+  const scrollToAboutSection = useCallback(() => {
+    const el = document.getElementById('section-about')
+    if (!el) return
+    const smooth = !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    el.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' })
+  }, [])
+
+  useLayoutEffect(() => {
+    updateMobileAboutCue()
+    window.addEventListener('resize', updateMobileAboutCue)
+    return () => window.removeEventListener('resize', updateMobileAboutCue)
+  }, [updateMobileAboutCue])
 
   useEffect(() => {
     const root = scrollRef.current
@@ -179,7 +205,7 @@ export default function App() {
       <div
         ref={scrollRef}
         className="scroll-journey-root"
-        onScroll={syncHeroProgress}
+        onScroll={onScrollRoot}
       >
         <div ref={heroRef} className="scroll-hero-block">
           <div className="scroll-sticky-view">
@@ -220,6 +246,26 @@ export default function App() {
         <ServicesSection />
         <PortfolioSection />
       </div>
+
+      <button
+        type="button"
+        className={`mobile-about-jump${showMobileAboutCue ? '' : ' mobile-about-jump--hide'}`}
+        onClick={scrollToAboutSection}
+        aria-label="About Motion Byte section par jayein"
+      >
+        <span className="mobile-about-jump-icon" aria-hidden>
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 5v11m0 0l-4.5 4.5M12 16l4.5 4.5"
+              stroke="currentColor"
+              strokeWidth="2.1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </span>
+        <span className="mobile-about-jump-label">About</span>
+      </button>
     </div>
   )
 }
