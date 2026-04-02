@@ -84,8 +84,23 @@
   z-index: 2;
 }
 
+@media (max-width: 640px) {
+  .scroll-next-section {
+    padding-top: clamp(6rem, 16vh, 14rem);
+    padding-left: max(0.85rem, env(safe-area-inset-left, 0px));
+    padding-right: max(0.85rem, env(safe-area-inset-right, 0px));
+    padding-bottom: max(2.5rem, env(safe-area-inset-bottom, 0px));
+  }
+}
+
 .about-section.scroll-next-section {
   padding-top: clamp(7.5rem, 22vh, 13rem);
+}
+
+@media (max-width: 640px) {
+  .about-section.scroll-next-section {
+    padding-top: clamp(5rem, 14vh, 9rem);
+  }
 }
 
 .about-content {
