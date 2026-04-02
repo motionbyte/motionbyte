@@ -24,6 +24,9 @@ import { useIntersectionVisible } from './hooks/useIntersectionVisible'
 import { AboutSection } from './sections/AboutSection'
 import { ServicesSection } from './sections/ServicesSection'
 import { PortfolioSection } from './sections/PortfolioSection'
+import { OurTeamSection } from './sections/OurTeamSection'
+import { ContactSection } from './sections/ContactSection'
+import { Footer } from './Footer'
 import { useScrollJourney } from './ScrollJourneyContext'
 import './App.css'
 
@@ -169,7 +172,9 @@ export default function App() {
     const root = scrollRef.current
     if (!root) return
     const nodes = Array.from(
-      root.querySelectorAll<HTMLElement>('.about-reveal, .services-reveal, .portfolio-reveal'),
+      root.querySelectorAll<HTMLElement>(
+        '.about-reveal, .services-reveal, .portfolio-reveal, .team-reveal, .contact-reveal, .footer-reveal',
+      ),
     )
     if (nodes.length === 0) return
 
@@ -245,6 +250,9 @@ export default function App() {
         <AboutSection />
         <ServicesSection />
         <PortfolioSection />
+        <OurTeamSection />
+        <ContactSection />
+        <Footer />
       </div>
 
       <button

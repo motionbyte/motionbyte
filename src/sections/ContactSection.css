@@ -1,0 +1,233 @@
+.contact-section.scroll-next-section--contact {
+  position: relative;
+  z-index: 6;
+  isolation: isolate;
+  border-top: 1px solid rgba(140, 120, 220, 0.18);
+  background:
+    radial-gradient(ellipse 70% 45% at 15% 20%, rgba(60, 200, 160, 0.06), transparent 55%),
+    radial-gradient(ellipse 80% 50% at 90% 80%, rgba(120, 80, 220, 0.12), transparent 55%),
+    linear-gradient(180deg, #06040c 0%, #0a0718 40%, #080616 100%);
+  padding-top: clamp(9rem, 24vh, 14rem);
+  padding-bottom: clamp(4rem, 12vh, 6rem);
+}
+
+@media (max-width: 640px) {
+  .contact-section.scroll-next-section--contact {
+    padding-top: clamp(5rem, 14vh, 10rem);
+  }
+}
+
+.contact-inner {
+  width: min(920px, 100%);
+  margin-inline: auto;
+}
+
+.contact-head {
+  margin-bottom: 2rem;
+}
+
+.contact-title {
+  margin: 0 0 0.85rem;
+  font-size: clamp(2rem, 6vw, 3rem);
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+
+.contact-title-muted {
+  color: rgba(250, 246, 255, 0.94);
+}
+
+.contact-title-accent {
+  background: linear-gradient(
+    120deg,
+    rgba(180, 255, 200, 0.95) 0%,
+    rgba(140, 200, 255, 1) 50%,
+    rgba(200, 160, 255, 1) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.contact-lead {
+  margin: 0;
+  max-width: 32rem;
+  font-size: clamp(0.94rem, 2.1vw, 1.05rem);
+  line-height: 1.6;
+  color: rgba(198, 188, 232, 0.9);
+}
+
+.contact-board {
+  display: grid;
+  gap: 1.1rem;
+  grid-template-columns: 1fr;
+}
+
+@media (min-width: 720px) {
+  .contact-board {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.15rem 1.25rem;
+  }
+
+  .contact-card--whatsapp {
+    grid-column: 1 / -1;
+  }
+}
+
+.contact-card {
+  position: relative;
+  border-radius: 1.15rem;
+  border: 1px solid var(--mb-neon-border-soft);
+  background: var(--mb-neon-bg-tile-flat);
+  backdrop-filter: var(--mb-neon-blur);
+  -webkit-backdrop-filter: var(--mb-neon-blur);
+  box-shadow: var(--mb-neon-glow-tile);
+  padding: 1.15rem 1.2rem 1.25rem;
+  transition:
+    border-color 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms ease;
+}
+
+.contact-card:hover {
+  border-color: var(--mb-neon-border-mid);
+  box-shadow: var(--mb-neon-glow-tile-hover);
+}
+
+.contact-card-kicker {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  margin: 0 0 0.75rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(160, 150, 210, 0.65);
+}
+
+.contact-wa-icon {
+  flex-shrink: 0;
+  color: rgba(130, 220, 160, 0.9);
+  filter: drop-shadow(0 0 8px rgba(80, 200, 120, 0.35));
+}
+
+.contact-link {
+  text-decoration: none;
+  color: rgba(255, 120, 150, 0.95);
+  font-weight: 600;
+  font-size: clamp(0.95rem, 2.2vw, 1.05rem);
+  word-break: break-word;
+  transition: color 180ms ease, text-shadow 180ms ease;
+}
+
+.contact-link:hover {
+  color: rgba(255, 180, 195, 1);
+  text-shadow: 0 0 20px rgba(255, 120, 150, 0.35);
+}
+
+.contact-link:focus-visible {
+  outline: 2px solid rgba(220, 200, 255, 0.9);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+.contact-link--tel {
+  font-variant-numeric: tabular-nums;
+}
+
+.contact-phone-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.contact-wa-hint {
+  margin: 0 0 0.85rem;
+  font-size: 0.86rem;
+  line-height: 1.45;
+  color: rgba(180, 170, 220, 0.78);
+}
+
+.contact-wa-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem 0.85rem;
+}
+
+.contact-wa-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.65rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(80, 200, 130, 0.45);
+  background: linear-gradient(
+    145deg,
+    rgba(20, 60, 45, 0.55) 0%,
+    rgba(10, 22, 18, 0.75) 100%
+  );
+  color: rgba(220, 255, 235, 0.96);
+  font-size: 0.92rem;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 0 22px rgba(60, 200, 120, 0.2),
+    0 6px 20px rgba(0, 0, 0, 0.35);
+  transition:
+    transform 200ms ease,
+    border-color 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.contact-wa-btn:hover {
+  transform: translateY(-2px);
+  border-color: rgba(120, 240, 180, 0.65);
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+    0 0 32px rgba(80, 220, 140, 0.35),
+    0 8px 24px rgba(0, 0, 0, 0.4);
+}
+
+.contact-wa-btn:focus-visible {
+  outline: 2px solid rgba(140, 240, 200, 0.95);
+  outline-offset: 3px;
+}
+
+.contact-wa-btn-icon {
+  color: rgba(130, 240, 170, 0.95);
+  flex-shrink: 0;
+}
+
+.contact-card--email.contact-reveal {
+  transition-delay: 40ms;
+}
+
+.contact-card--phones.contact-reveal {
+  transition-delay: 100ms;
+}
+
+.contact-card--whatsapp.contact-reveal {
+  transition-delay: 160ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .contact-card--email.contact-reveal,
+  .contact-card--phones.contact-reveal,
+  .contact-card--whatsapp.contact-reveal {
+    transition-delay: 0ms;
+  }
+
+  .contact-wa-btn:hover {
+    transform: none;
+  }
+}

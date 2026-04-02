@@ -108,7 +108,10 @@
 }
 
 .about-reveal,
-.services-reveal {
+.services-reveal,
+.team-reveal,
+.contact-reveal,
+.footer-reveal {
   opacity: 0;
   transform: translate3d(0, 34px, 0) scale(0.985);
   /* No filter: blur() — keeps WebGL wordmarks + text sharp during scroll reveal */
@@ -119,7 +122,10 @@
 }
 
 .about-reveal.is-visible,
-.services-reveal.is-visible {
+.services-reveal.is-visible,
+.team-reveal.is-visible,
+.contact-reveal.is-visible,
+.footer-reveal.is-visible {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
 }
@@ -206,7 +212,13 @@
   .about-reveal,
   .about-reveal.is-visible,
   .services-reveal,
-  .services-reveal.is-visible {
+  .services-reveal.is-visible,
+  .team-reveal,
+  .team-reveal.is-visible,
+  .contact-reveal,
+  .contact-reveal.is-visible,
+  .footer-reveal,
+  .footer-reveal.is-visible {
     opacity: 1;
     transform: none;
     filter: none;
@@ -238,12 +250,12 @@
     min-height: 3.2rem;
     padding: 0.4rem 0.5rem 0.48rem;
     margin: 0;
-    border: 1px solid rgba(170, 140, 255, 0.45);
+    border: 1px solid var(--mb-neon-border);
     border-radius: 1rem;
     background: linear-gradient(165deg, rgba(28, 18, 48, 0.94) 0%, rgba(10, 8, 22, 0.96) 100%);
-    box-shadow:
-      0 0 0 1px rgba(255, 255, 255, 0.06) inset,
-      0 12px 36px rgba(0, 0, 0, 0.5);
+    backdrop-filter: var(--mb-neon-blur);
+    -webkit-backdrop-filter: var(--mb-neon-blur);
+    box-shadow: var(--mb-neon-glow-tile);
     color: rgba(235, 225, 255, 0.96);
     font-size: 0.6rem;
     font-weight: 700;
@@ -254,7 +266,14 @@
     transition:
       opacity 260ms ease,
       transform 260ms ease,
-      visibility 260ms ease;
+      visibility 260ms ease,
+      box-shadow 220ms ease,
+      border-color 220ms ease;
+  }
+
+  .mobile-about-jump:hover {
+    box-shadow: var(--mb-neon-glow-tile-hover);
+    border-color: var(--mb-neon-border);
   }
 
   .mobile-about-jump:active {

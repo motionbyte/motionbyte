@@ -104,7 +104,11 @@ export function ServicesSection() {
   }, [openId])
 
   return (
-    <section className="services-section scroll-next-section scroll-next-section--services" aria-label="Services">
+    <section
+      id="section-services"
+      className="services-section scroll-next-section scroll-next-section--services"
+      aria-label="Services"
+    >
       <div className="services-inner">
         <p className="next-sec-kicker services-reveal">03</p>
 

@@ -21,6 +21,7 @@ function musicVideoHeading(item: PortfolioItem, meta: Record<string, YoutubeOEmb
 
 export function PortfolioSection() {
   const [activeId, setActiveId] = useState<PortfolioSectionId>('music-videos')
+  const [portfolioWorksOpen, setPortfolioWorksOpen] = useState(false)
   const [mvModal, setMvModal] = useState<MvModalState>(null)
   const [ytMeta, setYtMeta] = useState<Record<string, YoutubeOEmbed>>({})
 
@@ -29,8 +30,9 @@ export function PortfolioSection() {
     [activeId],
   )
 
-  /** Prefetch YouTube titles for music-video grid cards (first track per item). */
+  /** Prefetch YouTube titles once the works grid is opened. */
   useEffect(() => {
+    if (!portfolioWorksOpen) return
     const mv = PORTFOLIO_SECTIONS.find((s) => s.id === 'music-videos')
     if (!mv) return
     const tracks = mv.items.flatMap((item) => (item.tracks?.[0] ? [item.tracks[0]] : []))
@@ -55,7 +57,7 @@ export function PortfolioSection() {
     return () => {
       cancelled = true
     }
-  }, [])
+  }, [portfolioWorksOpen])
 
   useEffect(() => {
     if (!mvModal) return
@@ -103,7 +105,11 @@ export function PortfolioSection() {
   }, [mvModal])
 
   return (
-    <section className="portfolio-section scroll-next-section scroll-next-section--portfolio" aria-label="Portfolio">
+    <section
+      id="section-portfolio"
+      className="portfolio-section scroll-next-section scroll-next-section--portfolio"
+      aria-label="Portfolio"
+    >
       <div className="portfolio-inner">
         <p className="next-sec-kicker portfolio-reveal">04</p>
 
@@ -115,83 +121,101 @@ export function PortfolioSection() {
           </div>
         </div>
 
-        <p className="portfolio-lead portfolio-reveal">
-          Selected work — a glimpse into our cinematic worlds, product builds, and growth campaigns.
-        </p>
+        {!portfolioWorksOpen ? (
+          <div className="portfolio-works-gate portfolio-reveal is-visible">
+            <button
+              type="button"
+              className="portfolio-works-gate-btn"
+              onClick={() => setPortfolioWorksOpen(true)}
+              aria-expanded="false"
+            >
+              Browse work
+            </button>
+            <p className="portfolio-works-gate-hint">
+              Music videos, films &amp; series, websites — tap to open the grid.
+            </p>
+          </div>
+        ) : (
+          <>
+            <p className="portfolio-lead portfolio-reveal is-visible">
+              Selected work — a glimpse into our cinematic worlds, product builds, and growth campaigns.
+            </p>
 
-        <div className="portfolio-app portfolio-reveal" role="region" aria-label="Portfolio categories">
-          <div className="portfolio-app-segments" role="tablist" aria-label="Portfolio sections">
-            {PORTFOLIO_SECTIONS.map((sec) => (
-              <button
-                key={sec.id}
-                type="button"
-                role="tab"
-                id={`portfolio-tab-${sec.id}`}
-                aria-selected={activeId === sec.id}
-                aria-controls={`portfolio-panel-${sec.id}`}
-                className={`portfolio-segment${activeId === sec.id ? ' is-active' : ''}`}
-                onClick={() => setActiveId(sec.id)}
+            <div className="portfolio-app portfolio-reveal is-visible" role="region" aria-label="Portfolio categories">
+              <div className="portfolio-app-segments" role="tablist" aria-label="Portfolio sections">
+                {PORTFOLIO_SECTIONS.map((sec) => (
+                  <button
+                    key={sec.id}
+                    type="button"
+                    role="tab"
+                    id={`portfolio-tab-${sec.id}`}
+                    aria-selected={activeId === sec.id}
+                    aria-controls={`portfolio-panel-${sec.id}`}
+                    className={`portfolio-segment${activeId === sec.id ? ' is-active' : ''}`}
+                    onClick={() => setActiveId(sec.id)}
+                  >
+                    <span className="portfolio-segment-label">{sec.label}</span>
+                  </button>
+                ))}
+              </div>
+
+              <div
+                className="portfolio-app-panel"
+                role="tabpanel"
+                id={`portfolio-panel-${active.id}`}
+                aria-labelledby={`portfolio-tab-${active.id}`}
               >
-                <span className="portfolio-segment-label">{sec.label}</span>
-              </button>
-            ))}
-          </div>
+                <p className="portfolio-panel-lead">{active.lead}</p>
 
-          <div
-            className="portfolio-app-panel"
-            role="tabpanel"
-            id={`portfolio-panel-${active.id}`}
-            aria-labelledby={`portfolio-tab-${active.id}`}
-          >
-            <p className="portfolio-panel-lead">{active.lead}</p>
-
-            <ul className="portfolio-panel-grid">
-              {active.items.map((item) => {
-                const hasTracks = Boolean(item.tracks?.length)
-                const cardHeading = musicVideoHeading(item, ytMeta)
-                return (
-                  <li key={item.id} className="portfolio-panel-tile">
-                    {hasTracks ? (
-                      <button
-                        type="button"
-                        className="portfolio-panel-tile-btn"
-                        onClick={() => setMvModal({ kind: 'catalog', item })}
-                        aria-label={`Open ${cardHeading} catalog`}
-                      >
-                        <h3 className="portfolio-panel-tile-title">{cardHeading}</h3>
-                        <p className="portfolio-panel-tile-summary">{item.summary}</p>
-                        <span className="portfolio-panel-tile-cta" aria-hidden>
-                          Open catalog
-                        </span>
-                        <span className="portfolio-panel-tile-meta" aria-hidden>
-                          {active.shortLabel}
-                        </span>
-                      </button>
-                    ) : (
-                      <div className="portfolio-panel-tile-inner">
-                        <h3 className="portfolio-panel-tile-title">{item.title}</h3>
-                        <p className="portfolio-panel-tile-summary">{item.summary}</p>
-                        {item.youtubeUrl ? (
-                          <a
-                            className="portfolio-panel-tile-link"
-                            href={item.youtubeUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
+                <ul className="portfolio-panel-grid">
+                  {active.items.map((item) => {
+                    const hasTracks = Boolean(item.tracks?.length)
+                    const cardHeading = musicVideoHeading(item, ytMeta)
+                    return (
+                      <li key={item.id} className="portfolio-panel-tile">
+                        {hasTracks ? (
+                          <button
+                            type="button"
+                            className="portfolio-panel-tile-btn"
+                            onClick={() => setMvModal({ kind: 'catalog', item })}
+                            aria-label={`Open ${cardHeading} catalog`}
                           >
-                            Watch on YouTube ↗
-                          </a>
-                        ) : null}
-                        <span className="portfolio-panel-tile-meta" aria-hidden>
-                          {active.shortLabel}
-                        </span>
-                      </div>
-                    )}
-                  </li>
-                )
-              })}
-            </ul>
-          </div>
-        </div>
+                            <h3 className="portfolio-panel-tile-title">{cardHeading}</h3>
+                            <p className="portfolio-panel-tile-summary">{item.summary}</p>
+                            <span className="portfolio-panel-tile-cta" aria-hidden>
+                              Open catalog
+                            </span>
+                            <span className="portfolio-panel-tile-meta" aria-hidden>
+                              {active.shortLabel}
+                            </span>
+                          </button>
+                        ) : (
+                          <div className="portfolio-panel-tile-inner">
+                            <h3 className="portfolio-panel-tile-title">{item.title}</h3>
+                            <p className="portfolio-panel-tile-summary">{item.summary}</p>
+                            {item.youtubeUrl ? (
+                              <a
+                                className="portfolio-panel-tile-link"
+                                href={item.youtubeUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                Watch on YouTube ↗
+                              </a>
+                            ) : null}
+                            <span className="portfolio-panel-tile-meta" aria-hidden>
+                              {active.shortLabel}
+                            </span>
+                          </div>
+                        )}
+                      </li>
+                    )
+                  })}
+                </ul>
+              </div>
+            </div>
+          </>
+        )}
       </div>
 
       {/* Music video: catalog (pockets) */}

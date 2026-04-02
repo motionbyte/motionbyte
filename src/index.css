@@ -29,3 +29,35 @@ body {
   font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* Shared neon glass — cards, panels, modals (see Services / Portfolio / App) */
+:root {
+  --mb-neon-border: rgba(180, 130, 255, 0.48);
+  --mb-neon-border-mid: rgba(170, 130, 255, 0.38);
+  --mb-neon-border-soft: rgba(170, 140, 255, 0.28);
+  --mb-neon-inset: 0 0 0 1px rgba(255, 255, 255, 0.07) inset;
+  --mb-neon-glow-tile:
+    var(--mb-neon-inset), 0 0 22px rgba(130, 70, 255, 0.32), 0 0 44px rgba(40, 200, 255, 0.1),
+    0 14px 36px rgba(0, 0, 0, 0.45);
+  --mb-neon-glow-tile-hover:
+    var(--mb-neon-inset), 0 0 32px rgba(150, 80, 255, 0.45), 0 0 56px rgba(60, 210, 255, 0.16),
+    0 20px 48px rgba(0, 0, 0, 0.52);
+  --mb-neon-glow-panel:
+    var(--mb-neon-inset), 0 0 28px rgba(130, 70, 255, 0.35), 0 0 52px rgba(40, 200, 255, 0.12),
+    0 22px 56px rgba(0, 0, 0, 0.45);
+  --mb-neon-glow-modal:
+    var(--mb-neon-inset), 0 0 36px rgba(130, 70, 255, 0.42), 0 0 72px rgba(40, 200, 255, 0.15),
+    0 34px 90px rgba(0, 0, 0, 0.58);
+  --mb-neon-glow-chip:
+    0 0 0 1px rgba(255, 255, 255, 0.06) inset, 0 0 14px rgba(130, 70, 255, 0.24),
+    0 4px 14px rgba(0, 0, 0, 0.38);
+  --mb-neon-glow-control:
+    var(--mb-neon-inset), 0 0 18px rgba(130, 70, 255, 0.28), 0 0 32px rgba(40, 200, 255, 0.1),
+    0 6px 20px rgba(0, 0, 0, 0.4);
+  --mb-neon-bg-tile: linear-gradient(145deg, rgba(26, 16, 48, 0.9) 0%, rgba(10, 8, 26, 0.82) 100%);
+  --mb-neon-bg-tile-flat: linear-gradient(145deg, rgba(26, 16, 46, 0.72) 0%, rgba(10, 6, 20, 0.62) 100%);
+  --mb-neon-bg-panel: linear-gradient(180deg, rgba(18, 12, 34, 0.78) 0%, rgba(9, 6, 22, 0.72) 100%);
+  --mb-neon-bg-modal: linear-gradient(180deg, rgba(18, 12, 34, 0.94) 0%, rgba(9, 6, 22, 0.92) 100%);
+  --mb-neon-blur: blur(10px);
+  --mb-neon-blur-strong: blur(14px);
+}
