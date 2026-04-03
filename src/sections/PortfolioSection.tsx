@@ -23,6 +23,7 @@ export function PortfolioSection() {
   const [activeId, setActiveId] = useState<PortfolioSectionId>('music-videos')
   const [portfolioWorksOpen, setPortfolioWorksOpen] = useState(false)
   const [mvModal, setMvModal] = useState<MvModalState>(null)
+  const [websiteModal, setWebsiteModal] = useState<PortfolioItem | null>(null)
   const [ytMeta, setYtMeta] = useState<Record<string, YoutubeOEmbed>>({})
 
   const active = useMemo(
@@ -70,6 +71,17 @@ export function PortfolioSection() {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [mvModal])
+
+  useEffect(() => {
+    if (!websiteModal) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return
+      e.preventDefault()
+      setWebsiteModal(null)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [websiteModal])
 
   useEffect(() => {
     if (!mvModal || mvModal.kind !== 'catalog') return
@@ -170,6 +182,7 @@ export function PortfolioSection() {
                 <ul className="portfolio-panel-grid">
                   {active.items.map((item) => {
                     const hasTracks = Boolean(item.tracks?.length)
+                    const hasWebsite = Boolean(item.website?.webUrl)
                     const cardHeading = musicVideoHeading(item, ytMeta)
                     return (
                       <li key={item.id} className="portfolio-panel-tile">
@@ -184,6 +197,22 @@ export function PortfolioSection() {
                             <p className="portfolio-panel-tile-summary">{item.summary}</p>
                             <span className="portfolio-panel-tile-cta" aria-hidden>
                               Open catalog
+                            </span>
+                            <span className="portfolio-panel-tile-meta" aria-hidden>
+                              {active.shortLabel}
+                            </span>
+                          </button>
+                        ) : hasWebsite ? (
+                          <button
+                            type="button"
+                            className="portfolio-panel-tile-btn"
+                            onClick={() => setWebsiteModal(item)}
+                            aria-label={`Open ${item.title} case study`}
+                          >
+                            <h3 className="portfolio-panel-tile-title">{item.title}</h3>
+                            <p className="portfolio-panel-tile-summary">{item.summary}</p>
+                            <span className="portfolio-panel-tile-cta" aria-hidden>
+                              View case study
                             </span>
                             <span className="portfolio-panel-tile-meta" aria-hidden>
                               {active.shortLabel}
@@ -355,6 +384,70 @@ export function PortfolioSection() {
                     <dd>{mvModal.track.experience}</dd>
                   </div>
                 </dl>
+              </div>
+            </div>
+          </div>
+        ) : null}
+      </div>
+
+      {/* Website case study */}
+      <div
+        className={`portfolio-mv-overlay portfolio-web-overlay${websiteModal ? ' is-open' : ''}`}
+        role="dialog"
+        aria-modal="true"
+        aria-hidden={!websiteModal}
+        aria-labelledby={websiteModal ? 'portfolio-web-title' : undefined}
+        onMouseDown={(e) => {
+          if (e.currentTarget === e.target) setWebsiteModal(null)
+        }}
+      >
+        {websiteModal?.website ? (
+          <div className="portfolio-mv-sheet portfolio-mv-sheet--wide portfolio-web-sheet">
+            <div className="portfolio-mv-topbar portfolio-mv-topbar--simple">
+              <div className="portfolio-mv-title" id="portfolio-web-title">
+                {websiteModal.title}
+              </div>
+              <button
+                type="button"
+                className="portfolio-mv-close"
+                onClick={() => setWebsiteModal(null)}
+                aria-label="Close"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="portfolio-mv-body portfolio-web-body">
+              <p className="portfolio-web-lead">{websiteModal.website.description}</p>
+              <dl className="portfolio-mv-fields portfolio-web-fields">
+                <div className="portfolio-mv-field">
+                  <dt>Client</dt>
+                  <dd>{websiteModal.website.client}</dd>
+                </div>
+                <div className="portfolio-mv-field">
+                  <dt>Web URL</dt>
+                  <dd>
+                    <a
+                      className="portfolio-web-external"
+                      href={websiteModal.website.webUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {websiteModal.website.webUrl.replace(/^https?:\/\//, '')} ↗
+                    </a>
+                  </dd>
+                </div>
+                <div className="portfolio-mv-field">
+                  <dt>Technology</dt>
+                  <dd>{websiteModal.website.technology}</dd>
+                </div>
+              </dl>
+              <div className="portfolio-web-casestudy">
+                <h3 className="portfolio-web-casestudy-heading">Case study</h3>
+                <div className="portfolio-web-casestudy-copy">
+                  {websiteModal.website.caseStudy.split(/\n\n+/).map((block, i) => (
+                    <p key={i}>{block.trim()}</p>
+                  ))}
+                </div>
               </div>
             </div>
           </div>
