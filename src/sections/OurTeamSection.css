@@ -3,7 +3,6 @@
   position: relative;
   z-index: 6;
   isolation: isolate;
-  border-top: 1px solid rgba(140, 120, 220, 0.18);
   background:
     radial-gradient(ellipse 85% 50% at 80% 0%, rgba(100, 60, 200, 0.12), transparent 50%),
     radial-gradient(ellipse 70% 45% at 10% 60%, rgba(0, 200, 220, 0.06), transparent 55%),
