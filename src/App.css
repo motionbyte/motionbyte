@@ -41,6 +41,7 @@
   flex-direction: column;
   background: transparent;
   pointer-events: none;
+  overflow: hidden;
 }
 
 /* Poora viewport logo — text alag layer, logo ke upar nahi */

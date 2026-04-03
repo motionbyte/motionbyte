@@ -1,5 +1,6 @@
 import { ServicesWordmarkParticles } from '../scene/ServicesWordmarkParticles'
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import './ServicesSection.css'
 
 const PRIMARY = [
@@ -103,7 +104,10 @@ export function ServicesSection() {
     if (!openId) setTermsOpen(false)
   }, [openId])
 
+  const modalRoot = typeof document !== 'undefined' ? document.body : null
+
   return (
+    <>
     <section
       id="section-services"
       className="services-section scroll-next-section scroll-next-section--services"
@@ -170,7 +174,11 @@ export function ServicesSection() {
           </ul>
         </div>
       </div>
+    </section>
 
+      {modalRoot
+        ? createPortal(
+            <>
       <div
         className={`services-app-overlay${openId ? ' is-open' : ''}`}
         role="dialog"
@@ -277,6 +285,10 @@ export function ServicesSection() {
           </div>
         </div>
       </div>
-    </section>
+            </>,
+            modalRoot,
+          )
+        : null}
+    </>
   )
 }

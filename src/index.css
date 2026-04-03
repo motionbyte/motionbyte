@@ -4,11 +4,17 @@
   box-sizing: border-box;
 }
 
+html {
+  min-height: 100dvh;
+  min-height: -webkit-fill-available;
+}
+
 html,
 body {
   margin: 0;
   width: 100%;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
   height: 100%;
   overflow: hidden;
   background: #06040c;
@@ -18,6 +24,7 @@ body {
   margin: 0;
   width: 100%;
   min-height: 100dvh;
+  min-height: -webkit-fill-available;
   height: 100%;
   display: flex;
   flex-direction: column;

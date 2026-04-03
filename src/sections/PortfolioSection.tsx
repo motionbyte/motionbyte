@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react'
+import { createPortal } from 'react-dom'
 import { PortfolioWordmarkParticles } from '../scene/PortfolioWordmarkParticles'
 import {
   PORTFOLIO_SECTIONS,
@@ -116,7 +117,10 @@ export function PortfolioSection() {
     }
   }, [mvModal])
 
+  const modalRoot = typeof document !== 'undefined' ? document.body : null
+
   return (
+    <>
     <section
       id="section-portfolio"
       className="portfolio-section scroll-next-section scroll-next-section--portfolio"
@@ -246,7 +250,11 @@ export function PortfolioSection() {
           </>
         )}
       </div>
+    </section>
 
+      {modalRoot
+        ? createPortal(
+            <>
       {/* Music video: catalog (pockets) */}
       <div
         className={`portfolio-mv-overlay${mvModal?.kind === 'catalog' ? ' is-open' : ''}`}
@@ -453,6 +461,10 @@ export function PortfolioSection() {
           </div>
         ) : null}
       </div>
-    </section>
+            </>,
+            modalRoot,
+          )
+        : null}
+    </>
   )
 }
