@@ -62,7 +62,7 @@ export function ContactSection() {
               <WhatsAppIcon className="contact-wa-icon" />
               WhatsApp
             </p>
-            <p className="contact-wa-hint">Choose a number to open chat in WhatsApp.</p>
+            <p className="contact-wa-hint">Tap below to open WhatsApp chat.</p>
             <ul className="contact-wa-list">
               {CONTACT_PHONES.map((p) => (
                 <li key={p.whatsappDigits}>

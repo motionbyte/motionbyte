@@ -11,7 +11,6 @@ export type ContactPhone = {
 
 export const CONTACT_PHONES: ContactPhone[] = [
   { display: '9867024294', telHref: '+919867024294', whatsappDigits: '919867024294' },
-  { display: '7611821710', telHref: '+917611821710', whatsappDigits: '917611821710' },
 ]
 
 export function mailtoHref(): string {
