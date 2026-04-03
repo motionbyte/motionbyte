@@ -8,6 +8,7 @@ import {
   type PortfolioTrack,
 } from './portfolioData'
 import { fetchYoutubeMeta, parseYoutubeVideoId, type YoutubeOEmbed } from './youtubeMeta'
+import { PortfolioTreasureGate } from './PortfolioTreasureGate'
 import './PortfolioSection.css'
 
 type MvModalState =
@@ -138,19 +139,7 @@ export function PortfolioSection() {
         </div>
 
         {!portfolioWorksOpen ? (
-          <div className="portfolio-works-gate portfolio-reveal is-visible">
-            <button
-              type="button"
-              className="portfolio-works-gate-btn"
-              onClick={() => setPortfolioWorksOpen(true)}
-              aria-expanded="false"
-            >
-              Browse work
-            </button>
-            <p className="portfolio-works-gate-hint">
-              Music videos, films &amp; series, websites — tap to open the grid.
-            </p>
-          </div>
+          <PortfolioTreasureGate onOpen={() => setPortfolioWorksOpen(true)} />
         ) : (
           <>
             <p className="portfolio-lead portfolio-reveal is-visible">
