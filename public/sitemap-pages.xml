@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
+  <url>
+    <loc>https://motionbyte.in/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <image:image>
+      <image:loc>https://motionbyte.in/logo.png</image:loc>
+      <image:title>Motion Byte Logo</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/about.png</image:loc>
+      <image:title>About Motion Byte</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/services.png</image:loc>
+      <image:title>Motion Byte Services</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/portfolio.png</image:loc>
+      <image:title>Motion Byte Portfolio</image:title>
+    </image:image>
+  </url>
+</urlset>

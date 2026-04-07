@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:image="http://www.google.com/schemas/sitemap-image/1.1"
+>
+  <url>
+    <loc>https://motionbyte.in/</loc>
+    <lastmod>2026-04-07</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <image:image>
+      <image:loc>https://motionbyte.in/Our%20Team/aman%20raj.png</image:loc>
+      <image:title>Aman Raj - Motion Byte Team</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/Our%20Team/arunsingh%20naruka.png</image:loc>
+      <image:title>Arunsingh Naruka - Motion Byte Team</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/Our%20Team/gunjan%20soral.png</image:loc>
+      <image:title>Gunjan Soral - Motion Byte Team</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/portfolio/ai-film.png</image:loc>
+      <image:title>AI Film Portfolio Visual</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/portfolio/it-platform.png</image:loc>
+      <image:title>IT Platform Portfolio Visual</image:title>
+    </image:image>
+    <image:image>
+      <image:loc>https://motionbyte.in/portfolio/promo-growth.png</image:loc>
+      <image:title>Promotions Portfolio Visual</image:title>
+    </image:image>
+  </url>
+</urlset>

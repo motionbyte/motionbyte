@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://motionbyte.in/sitemap.xml
+Sitemap: https://motionbyte.in/sitemap-pages.xml
+Sitemap: https://motionbyte.in/sitemap-media.xml
