@@ -29,4 +29,18 @@ export const TEAM_MEMBERS: TeamMember[] = [
     tag: 'Creative engine',
     imageSrc: encodeURI('/Our Team/gunjan soral.png'),
   },
+  {
+    id: 'tapesh-panwar',
+    name: 'Tapesh Panwar',
+    role: 'Team',
+    tag: 'Production & delivery',
+    imageSrc: encodeURI('/Our Team/tapesh panwar.jpeg'),
+  },
+  {
+    id: 'pallab-baruah',
+    name: 'Pallab Baruah',
+    role: 'Team',
+    tag: 'Creative & post',
+    imageSrc: encodeURI('/Our Team/pallab baruah.jpg'),
+  },
 ]

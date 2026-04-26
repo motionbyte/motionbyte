@@ -125,6 +125,20 @@
   .team-card--3 {
     margin-top: 2.75rem;
   }
+
+  .team-card--4 {
+    grid-column: 1;
+    justify-self: center;
+    width: min(100%, 360px);
+    margin-top: 2.25rem;
+  }
+
+  .team-card--5 {
+    grid-column: 3;
+    justify-self: center;
+    width: min(100%, 360px);
+    margin-top: 2.25rem;
+  }
 }
 
 /* Connecting beam (desktop) */

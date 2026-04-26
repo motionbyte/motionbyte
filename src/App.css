@@ -110,6 +110,7 @@
 
 .about-reveal,
 .services-reveal,
+.timelines-reveal,
 .team-reveal,
 .contact-reveal {
   opacity: 0;
@@ -123,6 +124,7 @@
 
 .about-reveal.is-visible,
 .services-reveal.is-visible,
+.timelines-reveal.is-visible,
 .team-reveal.is-visible,
 .contact-reveal.is-visible {
   opacity: 1;
@@ -212,6 +214,8 @@
   .about-reveal.is-visible,
   .services-reveal,
   .services-reveal.is-visible,
+  .timelines-reveal,
+  .timelines-reveal.is-visible,
   .team-reveal,
   .team-reveal.is-visible,
   .contact-reveal,

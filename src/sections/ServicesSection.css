@@ -524,6 +524,45 @@
   font-size: 0.92rem;
 }
 
+.services-app-timelines-link-wrap {
+  margin: 1rem 0 0;
+}
+
+.services-app-timelines-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: rgba(160, 230, 255, 0.95);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(120, 210, 255, 0.45);
+  padding-bottom: 0.12rem;
+  transition: color 180ms ease, border-color 180ms ease;
+}
+
+.services-app-timelines-link::after {
+  content: '→';
+  font-weight: 700;
+  opacity: 0.85;
+  transition: transform 180ms ease;
+}
+
+.services-app-timelines-link:hover {
+  color: rgba(220, 250, 255, 0.98);
+  border-color: rgba(180, 240, 255, 0.75);
+}
+
+.services-app-timelines-link:hover::after {
+  transform: translate3d(3px, 0, 0);
+}
+
+.services-app-timelines-link:focus-visible {
+  outline: 2px solid rgba(220, 200, 255, 0.85);
+  outline-offset: 4px;
+  border-radius: 4px;
+}
+
 .services-app-chip-grid {
   list-style: none;
   margin: 0;

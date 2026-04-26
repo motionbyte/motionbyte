@@ -10,7 +10,7 @@ export function OurTeamSection() {
     >
       <div className="team-inner">
         <div className="team-head team-reveal">
-          <p className="next-sec-kicker">05</p>
+          <p className="next-sec-kicker">06</p>
           <div className="team-title-row">
             <h2 className="team-title">
               <span className="team-title-line" aria-hidden>
@@ -25,7 +25,8 @@ export function OurTeamSection() {
         </div>
 
         <p className="team-lead team-reveal">
-          Three founders. One obsession: stories that hit harder than budget or gear ever could.
+          Three founders and teammates behind the camera. One obsession: stories that hit harder than budget or gear
+          ever could.
         </p>
 
         <div className="team-roster" role="list">

@@ -222,6 +222,24 @@ export function ServicesSection() {
                     </li>
                   ))}
                 </ul>
+                <p className="services-app-timelines-link-wrap">
+                  <a
+                    href="#section-timelines"
+                    className="services-app-timelines-link"
+                    onClick={(e) => {
+                      e.preventDefault()
+                      setOpenId(null)
+                      window.requestAnimationFrame(() => {
+                        document.getElementById('section-timelines')?.scrollIntoView({
+                          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+                          block: 'start',
+                        })
+                      })
+                    }}
+                  >
+                    Production timelines — from music videos to feature films
+                  </a>
+                </p>
               </div>
             ) : openId === 'it' ? (
               <div className="services-app-section-wrap">

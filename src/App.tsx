@@ -23,6 +23,7 @@ import { useDocumentVisible } from './hooks/useDocumentVisible'
 import { useIntersectionVisible } from './hooks/useIntersectionVisible'
 import { AboutSection } from './sections/AboutSection'
 import { ServicesSection } from './sections/ServicesSection'
+import { ProductionTimelinesSection } from './sections/ProductionTimelinesSection'
 import { PortfolioSection } from './sections/PortfolioSection'
 import { OurTeamSection } from './sections/OurTeamSection'
 import { ContactSection } from './sections/ContactSection'
@@ -173,7 +174,7 @@ export default function App() {
     if (!root) return
     const nodes = Array.from(
       root.querySelectorAll<HTMLElement>(
-        '.about-reveal, .services-reveal, .portfolio-reveal, .team-reveal, .contact-reveal',
+        '.about-reveal, .services-reveal, .timelines-reveal, .portfolio-reveal, .team-reveal, .contact-reveal',
       ),
     )
     if (nodes.length === 0) return
@@ -249,6 +250,7 @@ export default function App() {
 
         <AboutSection />
         <ServicesSection />
+        <ProductionTimelinesSection />
         <PortfolioSection />
         <OurTeamSection />
         <ContactSection />

@@ -26,7 +26,7 @@ export function ContactSection() {
     >
       <div className="contact-inner">
         <header className="contact-head contact-reveal">
-          <p className="next-sec-kicker">06</p>
+          <p className="next-sec-kicker">07</p>
           <h2 className="contact-title">
             <span className="contact-title-muted">Contact</span>{' '}
             <span className="contact-title-accent">us</span>

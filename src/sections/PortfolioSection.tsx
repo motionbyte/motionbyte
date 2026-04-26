@@ -128,7 +128,7 @@ export function PortfolioSection() {
       aria-label="Portfolio"
     >
       <div className="portfolio-inner">
-        <p className="next-sec-kicker portfolio-reveal">04</p>
+        <p className="next-sec-kicker portfolio-reveal">05</p>
 
         <div className="portfolio-heading-wrap">
           <div className="portfolio-heading-spacer" aria-hidden />

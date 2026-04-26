@@ -3,6 +3,7 @@ import './Footer.css'
 const NAV = [
   { href: '#section-about', label: 'About' },
   { href: '#section-services', label: 'Services' },
+  { href: '#section-timelines', label: 'Timelines' },
   { href: '#section-portfolio', label: 'Portfolio' },
   { href: '#section-team', label: 'Team' },
   { href: '#section-contact', label: 'Contact' },
