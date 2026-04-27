@@ -32,8 +32,8 @@ export const TEAM_MEMBERS: TeamMember[] = [
   {
     id: 'tapesh-panwar',
     name: 'Tapesh Panwar',
-    role: 'Marketing & Sales',
-    tag: 'Production & delivery',
+    role: 'Team',
+    tag: 'Marketing & Sales',
     imageSrc: encodeURI('/Our Team/tapesh panwar.jpeg'),
   },
   {
